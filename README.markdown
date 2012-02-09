@@ -1,4 +1,4 @@
-###cardrand.c
+#cardrand.c
 
 A simple wrapper around libopensc for retrieving random data from a smart card HWRNG and feeding it into the kernel random pool using an ioctl. This makes it available to any application using /dev/random
 
