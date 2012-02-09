@@ -2,8 +2,9 @@
  * cardrand.c: A simple wrapper around libopensc for retrieving random data from a smart card HWRNG
  *             and feeding it into the kernel random pool using an ioctl. This makes it available
  *             to any application using /dev/random.
+ * Original code for this came from opensc-explorer
  *
- * Copyrigt (C) 2010 Stephen Oliver <mrsteveman1@gmail.com>
+ * Copyright (C) 2010 Stephen Oliver <mrsteveman1@gmail.com>
  * Portions copyright (C) 2001  Juha Yrjölä <juha.yrjola@iki.fi>
  *
  * This program is free software; you can redistribute it and/or
