@@ -189,25 +189,19 @@ static void do_random()
 
         struct rand_pool_info *output;
 	int fd = open(DEV_RANDOM, O_WRONLY);
-	if (fd == -1)
+	if (fd == -1) {
 		syslog(LOG_ERR,"Failed to open %s", DEV_RANDOM);
-
+	}
 	while (1) {
 
 		r = sc_get_challenge(card, buffer, count);
 		if (r < 0) {
 			syslog(LOG_ERR,"Failed to get random bytes: %s\n", sc_strerror(r));
 		}
-		//printf("Card returned: %s\n",buffer);
-
         	output = (struct rand_pool_info *)malloc(sizeof(struct rand_pool_info) + n);
-        	if (!output) {
-                	syslog(LOG_ERR,"malloc failure in kernel_rng_add_entropy_no_bitcount_increase(%d)", n);
-		}
 		output -> entropy_count = n_bits;
 		output -> buf_size      = n;
 		memcpy(&(output -> buf[0]), buffer, n);
-
 		if (ioctl(fd, RNDADDENTROPY, output) == -1) {
 			syslog(LOG_ERR,"ioctl(RNDADDENTROPY) failed!");
 		}
